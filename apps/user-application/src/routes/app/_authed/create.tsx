@@ -22,12 +22,12 @@ export const Route = createFileRoute("/app/_authed/create")({
 function RouteComponent() {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   const createMutation = useMutation(
     trpc.links.createLink.mutationOptions({
       onSuccess: (linkId) => {
-        nav({
+        navigate({
           to: "/app/link/$id",
           params: {
             id: linkId,
@@ -37,7 +37,7 @@ function RouteComponent() {
       onError: () => {
         toast.error("Failed to create link");
       },
-    }),
+    })
   );
 
   const isValidUrl = (string: string) => {
